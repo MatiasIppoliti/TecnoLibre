@@ -1,9 +1,10 @@
 import React from 'react'
+import ItemCount from '../ItemCount.js'
 
 export default function ItemListContainer () {
     return (
         <>
-        <h2 style={{ marginLeft: "20px" }}>Muy pronto</h2>
+        <ItemCount></ItemCount>
         </>
         );
 }
