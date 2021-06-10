@@ -4,6 +4,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         height: 140,
-        width: 200,
+        width: 300,
         marginTop: 50,
         justifyContent: 'center',
     },
@@ -22,20 +23,29 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 10,
     },
     buttongroup: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         marginTop: -10,
     },
+
+    button: {
+        borderRightColor: '#C4C4C4 !important',
+    },
+
     texto: {
         textAlign: 'center', 
-        marginTop: 10,
+        paddingTop: 5,
         },
     contador: {
-        textAlign: 'bottom',
+        textAlign: 'start',
         },    
     }));
     
-export default function ItemCount() {
-    const [contador, setContador] = useState(0);
+export default function ItemCount(stock) {
+    const [contador, setContador] = useState(1);
     const clases = useStyles();
+    stock = 10;
     
     return (
         <Grid container className={clases.root}>
@@ -43,16 +53,17 @@ export default function ItemCount() {
             <Grid container justify="center">
                 <Grid align='center' item>
                 <Paper elevation={5} className={clases.paper}>
-                    <h5 className={clases.texto}>Cantidad</h5>
+                    <h5 className={clases.texto}>Cantidad ({stock - contador} disponibles)</h5>
                     <ButtonGroup className={clases.buttongroup} size="large" aria-label="small outlined button group" >
-                        <Button onClick={() => {setContador(contador + 1)}}>+</Button>
-                        <Paper ClassName={clases.contador}>{contador}</Paper>
-                        <Button onClick={() => {setContador(contador - 1)}}>-</Button>
+                        <Button className={clases.button} disabled={contador >= stock} onClick={() => {setContador(contador + 1)}}>+</Button>
+                        <Typography variant="h6" gutterBottom>
+                            {contador}
+                        </Typography>
+                        <Button disabled={contador <= 0} onClick={() => {setContador(contador - 1)}}>-</Button>
                     </ButtonGroup>
-                    <Button className={clases.envio} variant="contained" color="primary">Agregar</Button>
+                    <Button className={clases.envio} variant="contained" color="primary" disabled={contador < 1} >Agregar</Button>
                 </Paper>                     
                 </Grid>
-            
             </Grid>
         </Grid>
         </Grid>

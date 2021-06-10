@@ -29,8 +29,9 @@ export default function CartWidget () {
     return (
         <div className={classes.root}>
         <IconButton color="default" >
-          <StyledBadge badgeContent={1} color="secondary" />
-          <ShoppingCartIcon fontSize="large" style={{ color: "white" }}/>
+          <StyledBadge badgeContent = {1} color="secondary">
+          </StyledBadge>
+          <ShoppingCartIcon fontSize="large" style={{ color: "white" }}/> 
         </IconButton>
         </div>
         );
