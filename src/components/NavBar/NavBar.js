@@ -1,5 +1,5 @@
 import React from 'react'
-import CartWidget from '../Cart/CartWidget'
+import {CartWidget} from '../Cart/CartWidget'
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -7,21 +7,18 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
-const styles = {
+const styles = withStyles(() => ({
   root: {
     flexGrow: 1
-  },
-  flex: {
-    flex: 1
   },
   menuButton: {
     marginLeft: -12,
     marginRight: 20
-  }
-};
+  },
+}));
 
-function NavBar(props) {
-  const { classes } = props;
+export const NavBar = () => {
+  const classes = styles;
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -33,24 +30,12 @@ function NavBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="title" color="inherit" className={classes.flex}>
+          <Typography variant="title" color="inherit">
             <a href="http://localhost:3000/" fontSize="large">TecnoLibre</a>
-          </Typography>
-          <CartWidget />
+          </Typography>         
+          <CartWidget/>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
-
-export default withStyles(styles)(NavBar);
-
-
-{/* <ul>
-<li><a href="http://localhost:3000/" className="App-link">Monitores</a></li>
-<li><a href="http://localhost:3000/" className="App-link">Teclados</a></li>
-<li><a href="http://localhost:3000/" className="App-link">Mouses</a></li>
-<li><a href="http://localhost:3000/" className="App-link">Auriculares</a></li>
-<li><a href="http://localhost:3000/" className="App-link">Gabinetes</a></li>
-</ul>
-<CartWidget></CartWidget>  */}

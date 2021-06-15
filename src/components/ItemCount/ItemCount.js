@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
         },    
     }));
     
-export default function ItemCount(stock) {
+export const ItemCount = stock => {
     const [contador, setContador] = useState(1);
     const clases = useStyles();
     stock = 10;
@@ -55,11 +55,11 @@ export default function ItemCount(stock) {
                 <Paper elevation={5} className={clases.paper}>
                     <h5 className={clases.texto}>Cantidad ({stock - contador} disponibles)</h5>
                     <ButtonGroup className={clases.buttongroup} size="large" aria-label="small outlined button group" >
-                        <Button className={clases.button} disabled={contador >= stock} onClick={() => {setContador(contador + 1)}}>+</Button>
+                        <Button className={clases.button} disabled={contador <= 0} onClick={() => {setContador(contador - 1)}}>-</Button>
                         <Typography variant="h6" gutterBottom>
                             {contador}
                         </Typography>
-                        <Button disabled={contador <= 0} onClick={() => {setContador(contador - 1)}}>-</Button>
+                        <Button disabled={contador >= stock} onClick={() => {setContador(contador + 1)}}>+</Button>
                     </ButtonGroup>
                     <Button className={clases.envio} variant="contained" color="primary" disabled={contador < 1} >Agregar</Button>
                 </Paper>                     
