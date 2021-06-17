@@ -1,26 +1,29 @@
 import React from 'react'
-import {CartWidget} from '../Cart/CartWidget'
-import { withStyles } from "@material-ui/core/styles";
+import {CartWidget} from './components/Cart/CartWidget'
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
-const styles = withStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
   },
 }));
 
 export const NavBar = () => {
-  const classes = styles;
+  const classes = useStyles();
+
   return (
-    <div className={classes.root}>
+  <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -30,10 +33,10 @@ export const NavBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="title" color="inherit">
+          <Typography variant="title" className={classes.title} color="inherit">
             <a href="http://localhost:3000/" fontSize="large">TecnoLibre</a>
-          </Typography>         
-          <CartWidget/>
+          </Typography>   
+          <CartWidget/>        
         </Toolbar>
       </AppBar>
     </div>

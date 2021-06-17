@@ -32,22 +32,22 @@ const useStyle = makeStyles(() => {
 
 export const Item = props => {
     const classes = useStyle();
+    const { producto } = props;
 
-    const {id, title, description, price, pictureUrl, alt} = props;
     return<>
         <Card className={classes.root}>
             <CardActionArea>
                 <CardMedia
                     component='img'
-                    image= {pictureUrl}
+                    image= {producto.picture.pictureUrl}
                     width="200"
-                    title= {alt}
+                    title= {producto.picture.Alt}
                 />
                 <CardContent>
-                    <Typography  component="h2" className={classes.titulo}>{title}</Typography>
-                    <Typography  color="textSecondary" component="p">{description}</Typography>
-                    <Typography  className={classes.precio}>${price}</Typography>
-                    <Typography  variant="h6" component="p">ID: {id}</Typography>
+                    <Typography  component="h2" className={classes.titulo}>{producto.title}</Typography>
+                    <Typography  color="textSecondary" component="p">{producto.description}</Typography>
+                    <Typography  className={classes.precio}>${producto.price}</Typography>
+                    <Typography  variant="h6" component="p">ID: {producto.id}</Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions className={classes.cardAction}>

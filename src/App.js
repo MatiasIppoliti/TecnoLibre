@@ -1,16 +1,19 @@
-import {NavBar} from "./components/NavBar/NavBar"
-import {ItemListContainer} from './components/Cart/ItemListContainer'
+import {NavBar} from './components/NavBar/NavBar'
+import {ItemListContainer} from './components/ItemListContainer/ItemListContainer'
+import {ItemDetailContainer} from './screens/ItemDetailContainer/ItemDetailContainer'
 import './App.css';
 
-function App() {
-  return (
+
+const App = ()  => {
+  return <>
     <div className="App">
       <header className="App-header">
-        <NavBar></NavBar>
-        <ItemListContainer></ItemListContainer>
+        <NavBar/>
+        <ItemListContainer/>
+        <ItemDetailContainer/>
       </header>
     </div>
-  );
+  </>
 }
 
 export default App;

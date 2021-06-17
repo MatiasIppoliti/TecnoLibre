@@ -7,11 +7,11 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      display: 'flex',
+      display: 'grid',
       '& > *': {
         margin: theme.spacing(1),
       },
-    },
+    }
   }));
 
   const StyledBadge = withStyles((theme) => ({
@@ -26,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 export const CartWidget = () => {
-    const clases = useStyles();
+    const classes = useStyles();
 
     return (
-        <div className={clases.root}>
+        <div className={classes.root}>
         <IconButton color="default" >
           <StyledBadge badgeContent = {1} color="secondary">
           </StyledBadge>
