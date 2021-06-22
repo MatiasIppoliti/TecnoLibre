@@ -4,14 +4,13 @@ import Chip from '@material-ui/core/Chip';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
-import { ItemCount } from '../../../components/ItemCount/ItemCount';
+import { ItemCount } from '../../ItemListContainer/components/ItemCount/ItemCount';
 import { itemDetailContainerStyles } from '../ItemDetailContainerStyles';
 import SecurityIcon from '@material-ui/icons/Security';
 import { green } from '@material-ui/core/colors';
 import CheckIcon from '@material-ui/icons/Check';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
-import StarIcon from '@material-ui/icons/Star';
 
 const useStyle = makeStyles((theme) => itemDetailContainerStyles(theme));
 

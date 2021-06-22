@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {ItemList} from '../ItemList/ItemList'
+import {ItemList} from '../ItemListContainer/components/ItemList/ItemList'
 
 const myPromise = () => {
     return new Promise ((resolve, reject) => {

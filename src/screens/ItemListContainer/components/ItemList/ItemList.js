@@ -1,4 +1,4 @@
-import { Item } from '../Item/Item.js'
+import { Item } from '../Item/Item'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';

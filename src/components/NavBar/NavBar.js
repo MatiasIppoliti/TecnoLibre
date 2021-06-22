@@ -6,6 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,9 +34,9 @@ export const NavBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="title" className={classes.title} color="inherit">
-            <a href="http://localhost:3000/" fontSize="large">TecnoLibre</a>
-          </Typography>   
+            <Typography variant="title" className={classes.title} color="inherit">
+              <Link to="/" fontSize="large">TecnoLibre</Link>
+            </Typography>  
           <CartWidget/>        
         </Toolbar>
       </AppBar>
