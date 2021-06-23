@@ -19,6 +19,10 @@ export const itemDetailContainerStyles = theme => {
         },
         container: {
             margin: theme.spacing(5,0)
+        },
+        button: {
+            fontSize: '18px',
+            marginTop: 40,
         }
     })
 }

@@ -6,8 +6,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import { ItemCount } from '../ItemCount/ItemCount';
+import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import Snackbar from '@material-ui/core/Snackbar';
 
 const useStyle = makeStyles(() => {
     return({
@@ -21,41 +23,78 @@ const useStyle = makeStyles(() => {
             marginBottom: '10px'
         },
         precio:{
-            fontSize: '40px'
+            fontSize: '40px',
+            paddingTop: '15px'
         },
         titulo:{
             fontSize: '20px',
             fontWeight: 'bold',
             marginBottom: '5px'
+        },
+        Snackbar:{
+            textAlign: 'center',
         }
     })
 })
+
+
 
 export const Item = props => {
     const classes = useStyle();
     const { producto } = props;
 
+    const [state, setState] = React.useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+      });
+    
+      const { vertical, horizontal, open } = state;
+    
+      const handleClick = (newState) => () => {
+        setState({ open: true, ...newState });
+      };
+    
+      const handleClose = () => {
+        setState({ ...state, open: false });
+      };
+
     return<>
         <Card className={classes.root}>
         
-            <CardActionArea onClick={<Link to={`/item/${producto.id}`} />}>
+            <CardActionArea>
+                <Link to={`/item/${producto.id}`}>
                 <CardMedia
                     component='img'
-                    image= {producto.picture.pictureUrl}
+                    image= {producto.pictureUrl}
                     width="200"
-                    title= {producto.picture.Alt}
+                    title= {producto.Alt}
                 />
-                
+                </Link>
             </CardActionArea>
                 <CardContent>
                     <Typography  component="h2" className={classes.titulo}>{producto.title}</Typography>
                     <Typography  color="textSecondary" component="p">{producto.description}</Typography>
                     <Typography  className={classes.precio}>{`$ ${producto.price}`}</Typography>
-                    <Typography  variant="h6" component="p">{`ID: ${producto.id}`}</Typography>
                 </CardContent>
             <CardActions className={classes.cardAction}>
-                <ItemCount/>
+            <Button
+                onClick={handleClick({ vertical: 'bottom', horizontal: 'left' })}
+                variant="contained"
+                color="primary"
+                endIcon={<ShoppingBasketIcon>send</ShoppingBasketIcon>}
+            >
+                Añadir al carrito
+            </Button>
             </CardActions>
+
+            <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="¡Su producto ha sido añadido con exito!"
+        key={vertical + horizontal}
+      />
         </Card>
     </>
 }

@@ -1,44 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import { ItemDetail } from '../ItemDetailContainer/ItemDetail/ItemDetail'
-import { useParams } from 'react-router-dom';
+import { ItemDetail } from '../ItemDetailContainer/ItemDetail/ItemDetail';
+import { LinearProgress } from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
+import { useParams, Redirect } from 'react-router-dom';
+import { itemData } from '../Services/ItemData';
 
-const myPromiseDetalleProducto = () => {
-    return new Promise ((resolve, reject) => {
-        setTimeout(() => resolve (
-                    {
-                        id: 1, 
-                        title: 'Placa de Video Zotac GeForce RTX 3070', 
-                        description: '8GB GDDR6 Twin Edge OC', 
-                        price: '260.000',
-                        picture: 'https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_22241_Placa_de_Video_Zotac_GeForce_RTX_3070_8GB_GDDR6_Twin_Edge_OC_cb8b31f6-grn.jpg',
-                        alt: "Placa de Video Zotac GeForce RTX 3070",
-                        freeShipping: true,
-                        stock: true,
-                        garantia: true,
-                        available: true,
-                        categoria: 'procesadores'
-                    }
-        ), 1000)
-    })
+const useStyle = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+        '& > * + *': {
+          marginTop: theme.spacing(1),
+    },
 }
+}));
+
+const myPromiseDetalleProducto = new Promise ((resolve, reject) => {
+        setTimeout(() => resolve (itemData), 2000)
+    })
 
 export const ItemDetailContainer = () => {
-
     const [detalleProducto, setDetalleProducto] = useState([])
-    const {productID} = useParams();
+    const {id} = useParams();
+    const classes = useStyle();
 
-const ejecutarPromise = () => {
-    myPromiseDetalleProducto().then((data) => {
-      const dataFiltrada = data.filter(element => element.categoria === productID);
-      setDetalleProducto(dataFiltrada);
-    });
-  };
+    useEffect(() => {
+        myPromiseDetalleProducto.then((data) => {
+            const dataFiltrada = data.filter(producto => producto.id === id);
+            setDetalleProducto(dataFiltrada)
+        }).catch(() => <Redirect to={'/*'} />)
+    }, [id])
 
-  useEffect(() => {
-    ejecutarPromise();
-  }, [productID]);
+    return <>
+    {detalleProducto.length === 0 ? (
+        <div className={classes.root}>
+            <LinearProgress/>
+        </div>
 
- return <>
-    <ItemDetail detalleProducto={detalleProducto} />
-    </>    
+    ) : (
+        detalleProducto.map((detalleProducto, i) => {
+            return <section key={i}>
+                <ItemDetail producto={detalleProducto} />
+            </section>
+        })
+    )}
+</>
 }

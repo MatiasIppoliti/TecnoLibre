@@ -2,6 +2,7 @@ import {NavBar} from './components/NavBar/NavBar'
 import {Router} from './Router/Router';
 import {BrowserRouter} from 'react-router-dom'
 import './App.css';
+import { Whatsapp } from './components/AddOns/components/Whatsapp';
 
 
 const App = ()  => {
@@ -12,6 +13,7 @@ const App = ()  => {
             <NavBar/>
           </header>
           <Router />
+          <Whatsapp />
         </BrowserRouter>
     </div>
   </>

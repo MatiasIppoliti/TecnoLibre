@@ -37,9 +37,6 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center', 
         paddingTop: 5,
         },
-    contador: {
-        textAlign: 'start',
-        },    
     }));
     
 export const ItemCount = stock => {

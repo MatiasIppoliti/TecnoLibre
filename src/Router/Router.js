@@ -8,10 +8,10 @@ export const Router = () => {
             <Route exact path="/">
                 <ItemListContainer />
             </Route>
-            <Route path="/category/:categoryID">
+            <Route path="/category/:category">
                 <ItemListContainer />
             </Route>
-            <Route path="/item/:productID">
+            <Route path="/item/:id">
                 <ItemDetailContainer />
             </Route>
         </Switch>

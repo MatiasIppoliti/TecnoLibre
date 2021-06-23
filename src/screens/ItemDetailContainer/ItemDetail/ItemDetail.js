@@ -1,3 +1,4 @@
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
@@ -11,13 +12,33 @@ import { green } from '@material-ui/core/colors';
 import CheckIcon from '@material-ui/icons/Check';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
+import { Button } from '@material-ui/core';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import Snackbar from '@material-ui/core/Snackbar';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 const useStyle = makeStyles((theme) => itemDetailContainerStyles(theme));
 
 export const ItemDetail = props => {
 
     const classes = useStyle();
-    const { detalleProducto } = props;
+    const { producto } = props;
+
+    const [state, setState] = React.useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+      });
+    
+      const { vertical, horizontal, open } = state;
+    
+      const handleClick = (newState) => () => {
+        setState({ open: true, ...newState });
+      };
+    
+      const handleClose = () => {
+        setState({ ...state, open: false });
+      };
 
     return <>
         <Grid className={classes.container} container 
@@ -30,22 +51,47 @@ export const ItemDetail = props => {
                 <Card>
                     <CardMedia
                         component='img'
-                        image= {detalleProducto.picture}
-                        title= {detalleProducto.alt}  
+                        image= {producto.pictureUrl}
+                        title= {producto.alt}  
                     />
                 </Card>
             </Grid>
             <Grid item xs={12} lg={4}>      
-                {(detalleProducto.stock) ? <Chip label="¡MAS VENDIDO!" color="secondary"></Chip> : null}
-                {(detalleProducto.available) ? <Typography variant="h4" className={classes.titulo}>{detalleProducto.title}</Typography> : null}
-                {(detalleProducto.available) ? <Typography color="textSecondary" component="p">{detalleProducto.description}</Typography> : null}
-                {(detalleProducto.available) ? <Typography className={classes.precio}>${detalleProducto.price}</Typography> : null }
+                <Chip label={producto.category} color="secondary"></Chip>
+                <Typography variant="h4" className={classes.titulo}>{producto.title}</Typography>
+                <Typography color="textSecondary" component="p">{producto.description}</Typography>
+                <Typography className={classes.precio}>${producto.price}</Typography>
                 <Divider variant="middle" />
-                {(detalleProducto.garantia) ? <Tooltip title="GARANTIA POR 36 MESES" arrow><SecurityIcon style={{ color: green[500] }} className={classes.icons}></SecurityIcon></Tooltip> : null}
-                {(detalleProducto.stock) ? <Tooltip title="STOCK DISPONIBLE" arrow><CheckIcon style={{ color: green[500] }} className={classes.icons}></CheckIcon></Tooltip> : null}
-                {(detalleProducto.freeShipping) ? <Tooltip title="ENVIOS GRATIS A TODO EL PAIS" arrow><LocalShippingIcon style={{ color: green[500] }} className={classes.icons}></LocalShippingIcon></Tooltip> : null }
-                {(detalleProducto.available) ? <ItemCount /> : null}
-                
+                <Tooltip title="GARANTIA POR 36 MESES" arrow><SecurityIcon style={{ color: green[500] }} className={classes.icons}></SecurityIcon></Tooltip>
+                <Tooltip title="STOCK DISPONIBLE" arrow><CheckIcon style={{ color: green[500] }} className={classes.icons}></CheckIcon></Tooltip>
+                <Tooltip title="ENVIOS GRATIS A TODO EL PAIS" arrow><LocalShippingIcon style={{ color: green[500] }} className={classes.icons}></LocalShippingIcon></Tooltip>
+                <ItemCount />
+                <Grid 
+                container 
+                justify="center"
+                alignItems="center" 
+                item xs={12}>
+                    <Button
+                    onClick={handleClick({ vertical: 'bottom', horizontal: 'left' })}
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    className={classes.button}
+                    endIcon={<ShoppingBasketIcon>send</ShoppingBasketIcon>}
+                >
+                    Añadir al carrito
+                </Button>
+
+                <Snackbar
+                    anchorOrigin={{ vertical, horizontal }}
+                    open={open}
+                    onClose={handleClose}
+                    endIcon={<CheckCircleOutlineIcon/>}
+                    message='¡Su producto ha sido añadido con exito!'
+                    key={vertical + horizontal}
+                />
+
+                </Grid>    
             </Grid>
         </Grid>
     </>

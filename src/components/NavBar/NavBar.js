@@ -41,10 +41,10 @@ export const NavBar = () => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-  const procesadores = "procesadores";
-  const gabinetes = "gabinetes";
-  const mouses = "mouses";
-  const fuentes = "fuentes"; 
+  const procesadores = "Procesadores";
+  const gabinetes = "Gabinetes";
+  const mouses = "Mouses";
+  const fuentes = "Fuentes"; 
 
   return (
   <div className={classes.root}>
@@ -52,7 +52,7 @@ export const NavBar = () => {
         <Toolbar>
           
           <Typography variant="title" className={classes.title} color="inherit">
-            <Link to="/" fontSize="large">TecnoLibre</Link>
+            <Link aria-current="page" to={'/'}>TecnoLibre</Link>
           </Typography>
         
         <div className={classes.title}>
@@ -98,16 +98,16 @@ export const NavBar = () => {
             >
             
               <MenuItem onClick={handleClose}>
-                <Link to={'/category/'+procesadores}>Procesadores</Link>
+                <Link to={`/category/${procesadores}`}>Procesadores</Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link to={'/category/'+gabinetes}>Gabinetes</Link>
+                <Link to={`/category/${gabinetes}`}>Gabinetes</Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link to={'/category/'+mouses}>Mouses</Link>
+                <Link to={`/category/${mouses}`}>Mouses</Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link to={'/category/'+fuentes}>Fuentes</Link>
+                <Link to={`/category/${fuentes}`}>Fuentes</Link>
               </MenuItem>
 
             </Popover> 
