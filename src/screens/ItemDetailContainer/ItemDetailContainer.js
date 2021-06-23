@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ItemDetail } from '../ItemDetailContainer/ItemDetail/ItemDetail'
+import { useParams } from 'react-router-dom';
 
 const myPromiseDetalleProducto = () => {
     return new Promise ((resolve, reject) => {
         setTimeout(() => resolve (
                     {
-                        id: 22, 
+                        id: 1, 
                         title: 'Placa de Video Zotac GeForce RTX 3070', 
                         description: '8GB GDDR6 Twin Edge OC', 
                         price: '260.000',
@@ -15,22 +16,29 @@ const myPromiseDetalleProducto = () => {
                         stock: true,
                         garantia: true,
                         available: true,
+                        categoria: 'procesadores'
                     }
-        ), 2000)
+        ), 1000)
     })
 }
 
-export const ItemDetailContainer = props => {
+export const ItemDetailContainer = () => {
 
     const [detalleProducto, setDetalleProducto] = useState([])
+    const {productID} = useParams();
 
-    useEffect( () => {
-        myPromiseDetalleProducto()
-        .then(response => setDetalleProducto(response))
-        .catch(error => console.log(error))
-    }, []);
+const ejecutarPromise = () => {
+    myPromiseDetalleProducto().then((data) => {
+      const dataFiltrada = data.filter(element => element.categoria === productID);
+      setDetalleProducto(dataFiltrada);
+    });
+  };
 
-    return<>
-        <ItemDetail detalleProducto={detalleProducto}/>
-    </>
+  useEffect(() => {
+    ejecutarPromise();
+  }, [productID]);
+
+ return <>
+    <ItemDetail detalleProducto={detalleProducto} />
+    </>    
 }

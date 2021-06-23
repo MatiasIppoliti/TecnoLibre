@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { ItemCount } from '../ItemCount/ItemCount';
+import { Link } from 'react-router-dom';
 
 const useStyle = makeStyles(() => {
     return({
@@ -36,20 +37,22 @@ export const Item = props => {
 
     return<>
         <Card className={classes.root}>
-            <CardActionArea>
+        
+            <CardActionArea onClick={<Link to={`/item/${producto.id}`} />}>
                 <CardMedia
                     component='img'
                     image= {producto.picture.pictureUrl}
                     width="200"
                     title= {producto.picture.Alt}
                 />
+                
+            </CardActionArea>
                 <CardContent>
                     <Typography  component="h2" className={classes.titulo}>{producto.title}</Typography>
                     <Typography  color="textSecondary" component="p">{producto.description}</Typography>
-                    <Typography  className={classes.precio}>${producto.price}</Typography>
-                    <Typography  variant="h6" component="p">ID: {producto.id}</Typography>
+                    <Typography  className={classes.precio}>{`$ ${producto.price}`}</Typography>
+                    <Typography  variant="h6" component="p">{`ID: ${producto.id}`}</Typography>
                 </CardContent>
-            </CardActionArea>
             <CardActions className={classes.cardAction}>
                 <ItemCount/>
             </CardActions>

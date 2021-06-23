@@ -4,8 +4,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Popover from '@material-ui/core/Popover';
 import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,28 +20,104 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  typography: {
+    padding: theme.spacing(2),
+  },
 }));
 
 export const NavBar = () => {
   const classes = useStyles();
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  const procesadores = "procesadores";
+  const gabinetes = "gabinetes";
+  const mouses = "mouses";
+  const fuentes = "fuentes"; 
+
   return (
   <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
+          
+          <Typography variant="title" className={classes.title} color="inherit">
+            <Link to="/" fontSize="large">TecnoLibre</Link>
+          </Typography>
+        
+        <div className={classes.title}>
+          <Button 
+           aria-describedby={id} 
+           variant="contained" 
+           color="primary" 
+           onClick={handleClick}
           >
-            <MenuIcon />
-          </IconButton>
-            <Typography variant="title" className={classes.title} color="inherit">
-              <Link to="/" fontSize="large">TecnoLibre</Link>
-            </Typography>  
+            Categorías
+          </Button>
+
+
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            className={classes.typography}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: -50,
+              horizontal: 'center',
+            }}
+            >
+
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+            >
+            
+              <MenuItem onClick={handleClose}>
+                <Link to={'/category/'+procesadores}>Procesadores</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to={'/category/'+gabinetes}>Gabinetes</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to={'/category/'+mouses}>Mouses</Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to={'/category/'+fuentes}>Fuentes</Link>
+              </MenuItem>
+
+            </Popover> 
+          </Menu>
+        </div>        
+          
           <CartWidget/>        
         </Toolbar>
       </AppBar>
     </div>
+    
   );
 }
