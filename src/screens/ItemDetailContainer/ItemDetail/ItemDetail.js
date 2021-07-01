@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
@@ -12,10 +12,7 @@ import { green } from '@material-ui/core/colors';
 import CheckIcon from '@material-ui/icons/Check';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
-import { Button } from '@material-ui/core';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import Snackbar from '@material-ui/core/Snackbar';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { FinalizarCompra } from '../../../components/FinalizarCompra/FinalizarCompra';
 
 const useStyle = makeStyles((theme) => itemDetailContainerStyles(theme));
 
@@ -23,22 +20,17 @@ export const ItemDetail = props => {
 
     const classes = useStyle();
     const { producto } = props;
+    const [cantidadProducto, setCantidadProducto] = useState(0)
+    const [click, setClick] = useState(false)
 
-    const [state, setState] = React.useState({
-        open: false,
-        vertical: 'top',
-        horizontal: 'center',
-      });
-    
-      const { vertical, horizontal, open } = state;
-    
-      const handleClick = (newState) => () => {
-        setState({ open: true, ...newState });
-      };
-    
-      const handleClose = () => {
-        setState({ ...state, open: false });
-      };
+    const onAdd = cantidad => {
+        setCantidadProducto(cantidad); 
+        setClick(true); 
+    }
+
+    const clickCancelar = cl =>{
+        setClick(false);
+    }
 
     return <>
         <Grid className={classes.container} container 
@@ -65,33 +57,14 @@ export const ItemDetail = props => {
                 <Tooltip title="GARANTIA POR 36 MESES" arrow><SecurityIcon style={{ color: green[500] }} className={classes.icons}></SecurityIcon></Tooltip>
                 <Tooltip title="STOCK DISPONIBLE" arrow><CheckIcon style={{ color: green[500] }} className={classes.icons}></CheckIcon></Tooltip>
                 <Tooltip title="ENVIOS GRATIS A TODO EL PAIS" arrow><LocalShippingIcon style={{ color: green[500] }} className={classes.icons}></LocalShippingIcon></Tooltip>
-                <ItemCount />
-                <Grid 
-                container 
-                justify="center"
-                alignItems="center" 
-                item xs={12}>
-                    <Button
-                    onClick={handleClick({ vertical: 'bottom', horizontal: 'left' })}
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    className={classes.button}
-                    endIcon={<ShoppingBasketIcon>send</ShoppingBasketIcon>}
-                >
-                    Añadir al carrito
-                </Button>
+                {
+                    click ? 
+                    <FinalizarCompra clickCancelar={clickCancelar}/>
+                    :
+                    <ItemCount stock={producto.stock} valorInicial={1}  cantidadProducto={cantidadProducto} onAdd={onAdd}/>
+                }
 
-                <Snackbar
-                    anchorOrigin={{ vertical, horizontal }}
-                    open={open}
-                    onClose={handleClose}
-                    endIcon={<CheckCircleOutlineIcon/>}
-                    message='¡Su producto ha sido añadido con exito!'
-                    key={vertical + horizontal}
-                />
-
-                </Grid>    
+  
             </Grid>
         </Grid>
     </>

@@ -4,6 +4,7 @@ import {useParams, Redirect} from 'react-router-dom'
 import {makeStyles} from '@material-ui/core/styles';
 import { LinearProgress } from '@material-ui/core';
 import { itemData } from '../Services/ItemData';
+import { dataBase } from '../../Firebase/firebase';
 
 const useStyle = makeStyles((theme) => ({
     root: {

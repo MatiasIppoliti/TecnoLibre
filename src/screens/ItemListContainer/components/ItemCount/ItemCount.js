@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     }));
     
 export const ItemCount = stock => {
+    const {onAdd} = stock;
     const [contador, setContador] = useState(1);
     const clases = useStyles();
     stock = 10;
@@ -58,7 +59,16 @@ export const ItemCount = stock => {
                         </Typography>
                         <Button disabled={contador >= stock} onClick={() => {setContador(contador + 1)}}>+</Button>
                     </ButtonGroup>
-                    <Button className={clases.envio} variant="contained" color="primary" disabled={contador < 1} >Agregar</Button>
+                    <Button
+                        onClick={() => onAdd(contador)}
+                        className={clases.envio} 
+                        variant="contained" 
+                        color="primary" 
+                        disabled={contador < 1}
+                         >
+                        Agregar al Carrito
+                    </Button>
+
                 </Paper>                     
                 </Grid>
             </Grid>

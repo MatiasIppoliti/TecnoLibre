@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,6 +30,7 @@ export const CartWidget = () => {
     const classes = useStyles();
 
     return (
+        <Link to={`/cart`}>
         <div className={classes.root}>
         <IconButton color="default" >
           <StyledBadge badgeContent = {1} color="secondary">
@@ -36,5 +38,6 @@ export const CartWidget = () => {
           <ShoppingCartIcon fontSize="large" style={{ color: "white" }}/> 
         </IconButton>
         </div>
+        </Link>
         );
 }
