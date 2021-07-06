@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
@@ -13,6 +13,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
 import { FinalizarCompra } from '../../../components/FinalizarCompra/FinalizarCompra';
+import { CartContext } from '../../../Context/CartContext';
 
 const useStyle = makeStyles((theme) => itemDetailContainerStyles(theme));
 
@@ -22,14 +23,17 @@ export const ItemDetail = props => {
     const { producto } = props;
     const [cantidadProducto, setCantidadProducto] = useState(0)
     const [click, setClick] = useState(false)
+    const {addItem, removeItem} = useContext(CartContext)
 
     const onAdd = cantidad => {
         setCantidadProducto(cantidad); 
         setClick(true); 
+        addItem({item: producto, quantity: cantidad}) 
     }
 
     const clickCancelar = cl =>{
         setClick(false);
+        removeItem(producto.id);
     }
 
     return <>

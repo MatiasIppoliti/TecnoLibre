@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../../../../Context/CartContext';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,12 +29,13 @@ const useStyles = makeStyles((theme) => ({
 
 export const CartWidget = () => {
     const classes = useStyles();
+    const {itemsQuantity} = useContext(CartContext)
 
     return (
         <Link to={`/cart`}>
         <div className={classes.root}>
         <IconButton color="default" >
-          <StyledBadge badgeContent = {1} color="secondary">
+          <StyledBadge badgeContent = {itemsQuantity} color="secondary">
           </StyledBadge>
           <ShoppingCartIcon fontSize="large" style={{ color: "white" }}/> 
         </IconButton>

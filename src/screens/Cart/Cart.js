@@ -1,34 +1,14 @@
-import React from 'react';
-import { useHistory } from "react-router-dom";
-import { Grid } from '@material-ui/core';
-import { Button } from '@material-ui/core';
+import React, {useContext} from 'react';
+import { CartContext } from '../../Context/CartContext'
+import { CartMessage } from './components/CartMessage/CartMessage';
+import { CartGrid } from './components/CartGrid/CartGrid';
 
 export const Cart = () =>{
-    const history = useHistory();
+    const {itemsCart} = useContext(CartContext)
 
-    return <section>
-    <Grid 
-            container 
-            justify="center"
-            alignItems="center" 
-            item xs={12}>
-            <h1>Productos en el Carrito:</h1>   
-            </Grid>
-    
-    <Grid 
-            container 
-            justify="center"
-            alignItems="center" 
-            item xs={12}>
-            <Button
-                onClick={() => history.goBack()}
-                variant="contained"
-                color="primary"
-                size="small"
-            >
-                Volver
-            </Button>
-    </Grid>
-
-    </section>
+    return <>
+  {
+    itemsCart.length === 0 ? <CartMessage/> : <CartGrid/>
+  }
+</>
 } 

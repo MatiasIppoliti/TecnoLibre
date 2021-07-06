@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {CartWidget} from './components/Cart/CartWidget'
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -9,6 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
 import {Link} from 'react-router-dom';
+import { CartContext } from '../../Context/CartContext'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,6 +42,7 @@ export const NavBar = () => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
+  const {itemsCart} = useContext(CartContext)
   const procesadores = "Procesadores";
   const gabinetes = "Gabinetes";
   const mouses = "Mouses";
@@ -113,8 +115,7 @@ export const NavBar = () => {
             </Popover> 
           </Menu>
         </div>        
-          
-          <CartWidget/>        
+          {itemsCart.length > 0 ? <CartWidget/> : ''}    
         </Toolbar>
       </AppBar>
     </div>
