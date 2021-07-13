@@ -1,45 +1,50 @@
 import React, {useEffect, useState} from 'react'
 import {ItemList} from '../ItemListContainer/components/ItemList/ItemList'
-import {useParams, Redirect} from 'react-router-dom'
-import {makeStyles} from '@material-ui/core/styles';
-import { LinearProgress } from '@material-ui/core';
-import { itemData } from '../Services/ItemData';
+import {useParams} from 'react-router-dom'
 import { dataBase } from '../../Firebase/firebase';
-
-const useStyle = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        '& > * + *': {
-          marginTop: theme.spacing(1),
-    },
-}
-}));
-
-
-const myPromise = new Promise ((resolve, reject) => {
-        setTimeout(() => resolve (itemData), 1500)
-    })
 
 export const ItemListContainer = () => {
 
     const [productos, setProductos] = useState([]);
-    const {category} = useParams();
-    const classes = useStyle();
+    const {categoryId} = useParams();
 
-      useEffect(() => {
-        myPromise.then(data => { setProductos(data) }).catch(() => <Redirect to={'/*'} />)
-    }, [])
+    useEffect(() =>{
+        const itemCollection = dataBase.collection("items");
 
-      const filterByCategory = listaProductos => { return category === undefined ? listaProductos : listaProductos.filter(producto => producto.category === category) }
+        if (categoryId === undefined){
+            itemCollection.get().then((querySnapshot) =>{
+                if(querySnapshot.size === 0){
+                    console.log('No results')
+                }
+                setProductos(querySnapshot.docs.map(doc => (
+                    {
+                        id: doc.id,
+                        data: doc.data()
+                    }
+                )));
+            }).catch((error) => {
+                console.log('Error:', error)
+            })
+        }else{
+            itemCollection.where("category", "==", categoryId).get().then((querySnapshot) =>{
+                if(querySnapshot.size === 0){
+                    console.log('No results')
+                }
+                setProductos(querySnapshot.docs.map(doc => (
+                    {
+                        id: doc.id,
+                        data: doc.data()
+                    }
+                )));
+            }).catch((error) => {
+                console.log('Error:', error)
+            })
+        }
+    }, [categoryId])
+
 
       return <>
-        {productos.length === 0 ? (
-            <div className={classes.root}><LinearProgress/></div>
-        ) : (
-            <section>
-                <ItemList productos={filterByCategory(productos)} />
-            </section>
-        )}
+        <ItemList productos={productos}/>
     </>
 }
 

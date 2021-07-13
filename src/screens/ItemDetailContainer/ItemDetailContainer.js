@@ -1,48 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { ItemDetail } from '../ItemDetailContainer/ItemDetail/ItemDetail';
-import { LinearProgress } from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
-import { useParams, Redirect } from 'react-router-dom';
-import { itemData } from '../Services/ItemData';
+import { useParams} from 'react-router-dom';
 import { dataBase } from '../../Firebase/firebase';
 
-const useStyle = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        '& > * + *': {
-          marginTop: theme.spacing(1),
-    },
-}
-}));
 
-const myPromiseDetalleProducto = new Promise ((resolve, reject) => {
-        setTimeout(() => resolve (itemData), 2000)
-    })
+export const ItemDetailContainer = props => {
 
-export const ItemDetailContainer = () => {
     const [detalleProducto, setDetalleProducto] = useState([])
-    const {id} = useParams();
-    const classes = useStyle();
+    const {productId} = useParams();
 
-    useEffect(() => {
-        myPromiseDetalleProducto.then((data) => {
-            const dataFiltrada = data.filter(producto => producto.id === id);
-            setDetalleProducto(dataFiltrada)
-        }).catch(() => <Redirect to={'/*'} />)
-    }, [id])
+    useEffect(()=>{
+        const itemCollection = dataBase.collection("items");
+        const item = itemCollection.doc(productId)
 
-    return <>
-    {detalleProducto.length === 0 ? (
-        <div className={classes.root}>
-            <LinearProgress/>
-        </div>
-
-    ) : (
-        detalleProducto.map((detalleProducto, i) => {
-            return <section key={i}>
-                <ItemDetail producto={detalleProducto} />
-            </section>
+        item.get().then((doc) =>{
+            if (!doc.exists){
+                console.log('No existe')
+                return;
+            }
+            setDetalleProducto([{id: doc.id, ...doc.data()}])
+            debugger;
+        }).catch((error) =>{
+            console.log('Error', error)
         })
-    )}
-</>
+    },)
+
+    return<>
+        {
+            detalleProducto.map((detalle) => <ItemDetail detalleProducto={detalle}/> )
+        }
+        
+    </>
 }

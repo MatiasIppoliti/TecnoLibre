@@ -26,9 +26,8 @@ export const ItemList = props => {
                 <Grid className={classes.grilla} item xs={12} >
                     <Grid container justify="center" >
                         {productos.map((producto) => <Item 
-                            key={producto.id} 
-                        id={producto.id}
-                        producto={producto}
+                            key={producto.id}
+                            producto={{id: producto.id, data: producto.data}}
                         />)}
                     </Grid>
                 </Grid>

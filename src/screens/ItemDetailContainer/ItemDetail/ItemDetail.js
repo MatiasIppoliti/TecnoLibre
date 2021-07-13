@@ -20,7 +20,7 @@ const useStyle = makeStyles((theme) => itemDetailContainerStyles(theme));
 export const ItemDetail = props => {
 
     const classes = useStyle();
-    const { producto } = props;
+    const { detalleProducto } = props;
     const [cantidadProducto, setCantidadProducto] = useState(0)
     const [click, setClick] = useState(false)
     const {addItem, removeItem} = useContext(CartContext)
@@ -28,12 +28,12 @@ export const ItemDetail = props => {
     const onAdd = cantidad => {
         setCantidadProducto(cantidad); 
         setClick(true); 
-        addItem({item: producto, quantity: cantidad}) 
+        addItem({item: detalleProducto, quantity: cantidad}) 
     }
 
     const clickCancelar = cl =>{
         setClick(false);
-        removeItem(producto.id);
+        removeItem(detalleProducto.id);
     }
 
     return <>
@@ -47,16 +47,16 @@ export const ItemDetail = props => {
                 <Card>
                     <CardMedia
                         component='img'
-                        image= {producto.pictureUrl}
-                        title= {producto.alt}  
+                        image= {detalleProducto.pictureUrl}
+                        title= {detalleProducto.alt}  
                     />
                 </Card>
             </Grid>
             <Grid item xs={12} lg={4}>      
-                <Chip label={producto.category} color="secondary"></Chip>
-                <Typography variant="h4" className={classes.titulo}>{producto.title}</Typography>
-                <Typography color="textSecondary" component="p">{producto.description}</Typography>
-                <Typography className={classes.precio}>${producto.price}</Typography>
+                <Chip label={detalleProducto.category} color="secondary"></Chip>
+                <Typography variant="h4" className={classes.titulo}>{detalleProducto.title}</Typography>
+                <Typography color="textSecondary" component="p">{detalleProducto.description}</Typography>
+                <Typography className={classes.precio}>${detalleProducto.price}</Typography>
                 <Divider variant="middle" />
                 <Tooltip title="GARANTIA POR 36 MESES" arrow><SecurityIcon style={{ color: green[500] }} className={classes.icons}></SecurityIcon></Tooltip>
                 <Tooltip title="STOCK DISPONIBLE" arrow><CheckIcon style={{ color: green[500] }} className={classes.icons}></CheckIcon></Tooltip>
@@ -65,7 +65,7 @@ export const ItemDetail = props => {
                     click ? 
                     <FinalizarCompra clickCancelar={clickCancelar}/>
                     :
-                    <ItemCount stock={producto.stock} valorInicial={1}  cantidadProducto={cantidadProducto} onAdd={onAdd}/>
+                    <ItemCount stock={detalleProducto.stock} valorInicial={1}  cantidadProducto={cantidadProducto} onAdd={onAdd}/>
                 }
 
   

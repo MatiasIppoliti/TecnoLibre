@@ -5,29 +5,21 @@ export const CartContext = createContext();
 
 export const CartComponentContext = props => {
 
-    const [itemsCart, setItemsCart] = useState([]); 
+    const [itemsCart, setItemsCart] = useState([]);
     const [subTotal, setSubTotal] = useState(0)  
-    const [itemsQuantity, setItemsQuantity] = useState(0)       
-
-    const IsInCart = idProducto => {
-        itemsCart.find(itemCart => itemCart.item.id === idProducto)
-    }
-
+    const [itemsQuantity, setItemsQuantity] = useState(0)   
+    
     const addItem = productoAgregado => {
         setSubTotal(subTotal + (productoAgregado.item.price * productoAgregado.quantity))
         setItemsQuantity(itemsQuantity + productoAgregado.quantity)
-        if (IsInCart(productoAgregado.item.id)){
-            const actualizarItem = itemsCart.map((itemCart) => {                        
-                const cantidadTotal = itemCart.quantity + productoAgregado.quantity;    
-                if (itemCart.item.id === productoAgregado.item.id){                     
-                    return {...itemCart, quantity: cantidadTotal}
-                }
-                return {itemCart}
-            })
-            setItemsCart(actualizarItem)
-        } else{
-            setItemsCart(productosAgregados => [...productosAgregados, productoAgregado])
-        }
+        const producto = itemsCart.find(itemCart => itemCart.item.id === productoAgregado.item.id)
+        if (producto){
+            const actualizarItem = producto.quantity + productoAgregado.quantity
+            producto.quantity = actualizarItem
+            setItemsCart(itemsCart)   
+        } else {
+        setItemsCart(productosAgregados => [...productosAgregados, productoAgregado])
+        }   
     }
 
     const clear = () => {
@@ -50,4 +42,4 @@ export const CartComponentContext = props => {
     return <CartContext.Provider value={{itemsCart, addItem, clear, removeItem, subTotal, itemsQuantity}}>
         {props.children}
     </CartContext.Provider>
-} 
+}

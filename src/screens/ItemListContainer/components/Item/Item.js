@@ -66,16 +66,16 @@ export const Item = props => {
                 <Link to={`/item/${producto.id}`}>
                 <CardMedia
                     component='img'
-                    image= {producto.pictureUrl}
+                    image= {producto.data.pictureUrl}
                     width="200"
-                    title= {producto.Alt}
+                    title= {producto.data.alt}
                 />
                 </Link>
             </CardActionArea>
                 <CardContent>
-                    <Typography  component="h2" className={classes.titulo}>{producto.title}</Typography>
-                    <Typography  color="textSecondary" component="p">{producto.description}</Typography>
-                    <Typography  className={classes.precio}>{`$ ${producto.price}`}</Typography>
+                    <Typography  component="h2" className={classes.titulo}>{producto.data.title}</Typography>
+                    <Typography  color="textSecondary" component="p">{producto.data.description}</Typography>
+                    <Typography  className={classes.precio}>{`$ ${producto.data.price}`}</Typography>
                 </CardContent>
             <CardActions className={classes.cardAction}>
             <Button
