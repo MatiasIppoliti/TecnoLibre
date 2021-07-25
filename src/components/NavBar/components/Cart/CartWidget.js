@@ -6,6 +6,7 @@ import Badge from '@material-ui/core/Badge';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../../../Context/CartContext';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,10 +30,11 @@ const useStyles = makeStyles((theme) => ({
 
 export const CartWidget = () => {
     const classes = useStyles();
-    const {itemsQuantity} = useContext(CartContext)
+    const {itemsQuantity} = useContext(CartContext);
+    const history = useHistory();
 
     return (
-        <Link to={`/cart`}>
+        <Link onClick={() => history.push(`/cart`)}>
         <div className={classes.root}>
         <IconButton color="default" >
           <StyledBadge badgeContent = {itemsQuantity} color="secondary">

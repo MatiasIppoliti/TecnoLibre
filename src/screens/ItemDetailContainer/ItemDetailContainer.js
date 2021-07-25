@@ -19,7 +19,6 @@ export const ItemDetailContainer = props => {
                 return;
             }
             setDetalleProducto([{id: doc.id, ...doc.data()}])
-            debugger;
         }).catch((error) =>{
             console.log('Error', error)
         })
