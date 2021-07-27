@@ -23,3 +23,7 @@ npm start
 ```
 
 Ver online: https://tecnolibre.netlify.app/
+
+### Preview del proyecto
+
+<img src="/src/Animation.gif" alt="My Project GIF" width="500" height="600">
