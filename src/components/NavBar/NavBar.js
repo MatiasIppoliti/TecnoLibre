@@ -1,11 +1,10 @@
-import React, {useState, useContext} from 'react'
+import React, {useState} from 'react'
 
 //Styles
 import { NavBarStyles } from './NavBarStyles';
 
 //Componentes
 import {CartWidget} from './components/Cart/CartWidget/CartWidget';
-import { CartContext } from '../../Context/CartContext';
 
 //Router
 import {Link} from 'react-router-dom';
@@ -37,7 +36,6 @@ export const NavBar = () => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-  const {itemsCart} = useContext(CartContext)
   const procesadores = "Procesadores";
   const gabinetes = "Gabinetes";
   const mouses = "Mouses";
