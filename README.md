@@ -16,8 +16,10 @@ La librería extra que usé es Material UI : https://material-ui.com
 
 ### Instalación
 
+```
 git clone https://github.com/MatiasIppoliti/tienda-ecommerce
 npm i
 npm start
+```
 
-Ver online: 
+Ver online: https://tecnolibre.netlify.app/
