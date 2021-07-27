@@ -1,10 +1,14 @@
-import {NavBar} from './components/NavBar/NavBar'
-import {Router} from './Router/Router';
-import {BrowserRouter} from 'react-router-dom'
+//Styles
 import './App.css';
-import { Whatsapp } from './components/AddOns/components/Whatsapp';
-import { CartComponentContext } from './Context/CartContext';
 
+//Componentes
+import {NavBar} from './components/NavBar/NavBar';
+import { Whatsapp } from './components/AddOns/components/Whatsapp/Whatsapp';
+import { CartComponentContext } from './Context/CartContext';
+import {Router} from './Router/Router';
+
+//Router
+import {BrowserRouter} from 'react-router-dom';
 
 const App = ()  => {
   return <>
@@ -15,7 +19,9 @@ const App = ()  => {
             <NavBar/>
           </header>
           <Router />
+          <main>
           <Whatsapp />
+          </main>
         </BrowserRouter>
       </CartComponentContext>
     </div>

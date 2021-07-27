@@ -1,10 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+
+//Styles
 import { FinalizarCompraStyles } from './FinalizarCompraStyles';
-import { Grid } from '@material-ui/core';
-import { Button } from '@material-ui/core';
+
+//Router
+import { Link, useHistory } from 'react-router-dom';
+
+//Material-ui
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
@@ -17,24 +21,25 @@ export const FinalizarCompra = props =>{
     
     return<div>
         <div>
-        <Grid 
-            container 
-            justify="center"
-            alignItems="center" 
-            item xs={12}>
-            <Link to={`/cart`}>
-                <Button
-                onClick={() => history.push(`/cart`)}
-                variant="contained"
-                color="primary"
-                size="large"
-                className={classes.buttons}
-                endIcon={<ArrowForwardIcon>send</ArrowForwardIcon>}
-            >
-                Finalizar la Compra
-            </Button>
-            </Link>
-        </Grid>
+            <Grid 
+                container 
+                justify="center"
+                alignItems="center" 
+                item xs={12}>
+                    
+                <Link to={`/cart`}>
+                    <Button
+                        onClick={() => history.push(`/cart`)}
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        className={classes.buttons}
+                        endIcon={<ArrowForwardIcon>send</ArrowForwardIcon>}
+                    >
+                        Finalizar la Compra
+                    </Button>
+                </Link>
+            </Grid>
 
         <Grid 
             container 

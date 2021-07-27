@@ -1,5 +1,16 @@
-import React, {useContext} from 'react'
-import {CartWidget} from './components/Cart/CartWidget'
+import React, {useState, useContext} from 'react'
+
+//Styles
+import { NavBarStyles } from './NavBarStyles';
+
+//Componentes
+import {CartWidget} from './components/Cart/CartWidget/CartWidget';
+import { CartContext } from '../../Context/CartContext';
+
+//Router
+import {Link} from 'react-router-dom';
+
+//Material-ui
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,28 +19,12 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Popover from '@material-ui/core/Popover';
-import {Link} from 'react-router-dom';
-import { CartContext } from '../../Context/CartContext'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-  typography: {
-    padding: theme.spacing(2),
-  },
-}));
+const useStyles = makeStyles((theme) => NavBarStyles(theme));
 
 export const NavBar = () => {
   const classes = useStyles();
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -100,22 +95,22 @@ export const NavBar = () => {
             >
             
               <MenuItem onClick={handleClose}>
-                <Link to={`/category/${procesadores}`}>Procesadores</Link>
+                <Link style={{ textDecoration: 'none', color: 'black' }} to={`/category/${procesadores}`}>Procesadores</Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link to={`/category/${gabinetes}`}>Gabinetes</Link>
+                <Link style={{ textDecoration: 'none', color: 'black' }} to={`/category/${gabinetes}`}>Gabinetes</Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link to={`/category/${mouses}`}>Mouses</Link>
+                <Link style={{ textDecoration: 'none', color: 'black' }} to={`/category/${mouses}`}>Mouses</Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link to={`/category/${fuentes}`}>Fuentes</Link>
+                <Link style={{ textDecoration: 'none', color: 'black' }} to={`/category/${fuentes}`}>Fuentes</Link>
               </MenuItem>
 
             </Popover> 
           </Menu>
         </div>        
-          {itemsCart.length > 0 ? <CartWidget/> : ''}    
+          <CartWidget/>    
         </Toolbar>
       </AppBar>
     </div>

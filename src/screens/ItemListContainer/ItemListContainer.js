@@ -1,10 +1,15 @@
-import React, {useEffect, useState} from 'react'
-import {ItemList} from '../ItemListContainer/components/ItemList/ItemList'
-import {useParams} from 'react-router-dom'
+import React, {useEffect, useState} from 'react';
+
+//Componentes
+import {ItemList} from '../ItemListContainer/components/ItemList/ItemList';
+
+//Router
+import {useParams} from 'react-router-dom';
+
+//Firebase
 import { dataBase } from '../../Firebase/firebase';
 
 export const ItemListContainer = () => {
-
     const [productos, setProductos] = useState([]);
     const {categoryId} = useParams();
 
@@ -41,7 +46,6 @@ export const ItemListContainer = () => {
             })
         }
     }, [categoryId])
-
 
       return <>
         <ItemList productos={productos}/>

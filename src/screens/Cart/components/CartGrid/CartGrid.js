@@ -1,21 +1,19 @@
 import React, { useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Paper from '@material-ui/core/Paper';
-import { CartContext } from '../../../../Context/CartContext';
+
+//Styles
 import { cartGridStyles } from './CartGridStyles';
+
+//Componentes
+import { CartContext } from '../../../../Context/CartContext';
+
+//Material-ui
+import { makeStyles } from '@material-ui/core/styles';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Paper} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyle = makeStyles((theme) => cartGridStyles(theme));
 
 export const CartGrid = () => {
-
     const {itemsCart, removeItem, subTotal} = useContext(CartContext)
     const classes = useStyle();
 

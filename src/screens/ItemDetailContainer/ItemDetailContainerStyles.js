@@ -25,4 +25,4 @@ export const itemDetailContainerStyles = theme => {
             marginTop: 40,
         }
     })
-}
+};

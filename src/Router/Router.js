@@ -1,8 +1,14 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+
+//Screens
 import {ItemListContainer} from '../screens/ItemListContainer/ItemListContainer'
 import {ItemDetailContainer} from '../screens/ItemDetailContainer/ItemDetailContainer';
 import { Cart } from '../screens/Cart/Cart';
+
+//Router
+import {Switch, Route} from 'react-router-dom';
+
+
 
 export const Router = () => {
     return <Switch>

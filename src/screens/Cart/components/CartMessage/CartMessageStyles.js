@@ -22,11 +22,14 @@ export const cartMessageStyles = theme => {
 
         },
         text:{
-            textAlign: 'center'
+            textAlign: 'center',
+            fontSize: '20px'
         },
+        
         buttonContainer:{
             display: 'flex',
-            justifyContent: 'center'
-        }
+            justifyContent: 'center',
+            marginTop: '20px'
+        },
     })
 } 

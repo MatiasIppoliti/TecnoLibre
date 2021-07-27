@@ -5,9 +5,9 @@ export const CartContext = createContext();
 export const CartComponentContext = props => {
 
     const [itemsCart, setItemsCart] = useState([]);
-    const [subTotal, setSubTotal] = useState(0)  
-    const [itemsQuantity, setItemsQuantity] = useState(0)
-    const [orderData, setOrderData] = useState('')   
+    const [subTotal, setSubTotal] = useState(0);  
+    const [itemsQuantity, setItemsQuantity] = useState(0);
+    const [orderData, setOrderData] = useState('');   
     
     const addItem = productoAgregado => {
         setSubTotal(subTotal + (productoAgregado.item.price * productoAgregado.quantity))

@@ -1,19 +1,20 @@
 import React, {useState, useContext} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Grid } from '@material-ui/core';
-import Chip from '@material-ui/core/Chip';
-import LocalShippingIcon from '@material-ui/icons/LocalShipping';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import { ItemCount } from '../../ItemListContainer/components/ItemCount/ItemCount';
+
+//Styles
 import { itemDetailContainerStyles } from '../ItemDetailContainerStyles';
-import SecurityIcon from '@material-ui/icons/Security';
-import { green } from '@material-ui/core/colors';
-import CheckIcon from '@material-ui/icons/Check';
-import Divider from '@material-ui/core/Divider';
-import Tooltip from '@material-ui/core/Tooltip';
+
+//Componentes
+import { ItemCount } from '../../ItemListContainer/components/ItemCount/ItemCount';
 import { FinalizarCompra } from '../../../components/FinalizarCompra/FinalizarCompra';
 import { CartContext } from '../../../Context/CartContext';
+
+//Material-ui
+import { makeStyles } from '@material-ui/core/styles';
+import { Typography, Grid, Chip, CardMedia, Card, Divider, Tooltip } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import SecurityIcon from '@material-ui/icons/Security';
+import CheckIcon from '@material-ui/icons/Check';
 
 const useStyle = makeStyles((theme) => itemDetailContainerStyles(theme));
 
@@ -57,7 +58,9 @@ export const ItemDetail = props => {
                 <Typography variant="h4" className={classes.titulo}>{detalleProducto.title}</Typography>
                 <Typography color="textSecondary" component="p">{detalleProducto.description}</Typography>
                 <Typography className={classes.precio}>${detalleProducto.price}</Typography>
+
                 <Divider variant="middle" />
+                
                 <Tooltip title="GARANTIA POR 36 MESES" arrow><SecurityIcon style={{ color: green[500] }} className={classes.icons}></SecurityIcon></Tooltip>
                 <Tooltip title="STOCK DISPONIBLE" arrow><CheckIcon style={{ color: green[500] }} className={classes.icons}></CheckIcon></Tooltip>
                 <Tooltip title="ENVIOS GRATIS A TODO EL PAIS" arrow><LocalShippingIcon style={{ color: green[500] }} className={classes.icons}></LocalShippingIcon></Tooltip>
@@ -67,8 +70,6 @@ export const ItemDetail = props => {
                     :
                     <ItemCount stock={detalleProducto.stock} valorInicial={1}  cantidadProducto={cantidadProducto} onAdd={onAdd}/>
                 }
-
-  
             </Grid>
         </Grid>
     </>

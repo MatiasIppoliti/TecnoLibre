@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
+
+//Componentes
 import { ItemDetail } from '../ItemDetailContainer/ItemDetail/ItemDetail';
+
+//Router
 import { useParams} from 'react-router-dom';
+
+//Firebase
 import { dataBase } from '../../Firebase/firebase';
 
 
 export const ItemDetailContainer = props => {
-
     const [detalleProducto, setDetalleProducto] = useState([])
     const {productId} = useParams();
 

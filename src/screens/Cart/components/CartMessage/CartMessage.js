@@ -1,21 +1,32 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
+
+//Styles
+import { cartMessageStyles } from './CartMessageStyles';
+
+//Router
+import { Link, useHistory } from 'react-router-dom';
+
+//Material-ui
+import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { cartMessageStyles } from './CartMessageStyles'
+import { Button } from '@material-ui/core';
 
 const useStyle = makeStyles((theme) => cartMessageStyles(theme));
 
 export const CartMessage = () =>{
-
     const classes = useStyle();
     const history = useHistory();
 
-    return<div className={classes.container}>
+    return <div className={classes.container}>
         <Typography className={classes.text} variant="h3">No hay artículos en el carrito.</Typography> 
         <div className={classes.buttonContainer}>
-            <Link className={classes.buttons} onClick={() => history.push(`/`)}>Volver a la tienda</Link>
+        <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            >
+            <Link style={{ textDecoration: 'none', color: 'white', fontWeight: 'bold' }} onClick={() => history.push(`/`)}>Volver a la tienda</Link>
+            </Button>
         </div>
     </div>
-} 
+}; 
