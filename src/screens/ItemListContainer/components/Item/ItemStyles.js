@@ -10,7 +10,7 @@ export const ItemStyles = ((theme) => {
             marginBottom: '10px'
         },
         precio:{
-            fontSize: '40px',
+            fontSize: '35px',
             paddingTop: '15px'
         },
         titulo:{

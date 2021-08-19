@@ -22,10 +22,10 @@ export const CartGrid = () => {
       <Table>
         <TableHead className={classes.headerTable}>
           <TableRow>
-            <TableCell align="center">Imagen</TableCell>
-            <TableCell align="center">Producto</TableCell>
-            <TableCell align="center">Cantidad</TableCell>
-            <TableCell align="center">Precio</TableCell>
+            <TableCell className={classes.headerText} align="center">Imagen</TableCell>
+            <TableCell className={classes.headerText} align="center">Producto</TableCell>
+            <TableCell className={classes.headerText} align="center">Cantidad</TableCell>
+            <TableCell className={classes.headerText} align="center">Precio</TableCell>
             <TableCell align="center"></TableCell>
           </TableRow>
         </TableHead>

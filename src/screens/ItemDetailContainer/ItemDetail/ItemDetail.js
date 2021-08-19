@@ -5,7 +5,7 @@ import { itemDetailContainerStyles } from '../ItemDetailContainerStyles';
 
 //Componentes
 import { ItemCount } from '../../ItemListContainer/components/ItemCount/ItemCount';
-import { FinalizarCompra } from '../../../components/FinalizarCompra/FinalizarCompra';
+import { FinalizarCompraProducto } from '../../../components/FinalizarCompraProducto/FinalizarCompraProducto';
 import { CartContext } from '../../../Context/CartContext';
 
 //Material-ui
@@ -66,7 +66,7 @@ export const ItemDetail = props => {
                 <Tooltip title="ENVIOS GRATIS A TODO EL PAIS" arrow><LocalShippingIcon style={{ color: green[500] }} className={classes.icons}></LocalShippingIcon></Tooltip>
                 {
                     click ? 
-                    <FinalizarCompra clickCancelar={clickCancelar}/>
+                    <FinalizarCompraProducto clickCancelar={clickCancelar}/>
                     :
                     <ItemCount stock={detalleProducto.stock} valorInicial={1}  cantidadProducto={cantidadProducto} onAdd={onAdd}/>
                 }

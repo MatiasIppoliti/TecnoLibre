@@ -7,9 +7,8 @@ import { cartMessageStyles } from './CartMessageStyles';
 import { Link, useHistory } from 'react-router-dom';
 
 //Material-ui
-import { Typography } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
 
 const useStyle = makeStyles((theme) => cartMessageStyles(theme));
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 //Styles
-import { FinalizarCompraStyles } from './FinalizarCompraStyles';
+import { FinalizarCompraStyles } from './FinalizarCompraProductoStyles';
 
 //Router
 import { Link, useHistory } from 'react-router-dom';
@@ -14,7 +14,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const useStyle = makeStyles((theme) => FinalizarCompraStyles(theme));
 
-export const FinalizarCompra = props =>{
+export const FinalizarCompraProducto = props =>{
     const classes = useStyle();
     const {clickCancelar} = props;
     const history = useHistory();

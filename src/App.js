@@ -11,7 +11,7 @@ import {Router} from './Router/Router';
 import {BrowserRouter} from 'react-router-dom';
 
 const App = ()  => {
-  return <>
+  return(
     <div className="App">
       <CartComponentContext> 
         <BrowserRouter>
@@ -25,7 +25,6 @@ const App = ()  => {
         </BrowserRouter>
       </CartComponentContext>
     </div>
-  </>
-}
+  )}
 
 export default App;

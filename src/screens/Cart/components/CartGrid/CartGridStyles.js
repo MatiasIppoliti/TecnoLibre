@@ -3,9 +3,13 @@ export const cartGridStyles = theme => {
         container:{
             display: 'flex',
             justifyContent: 'center'
+            
         },
         headerTable:{
-            backgroundColor: '#e6e6e6'
+            backgroundColor: '#4056b3',
+        },
+        headerText:{
+            color: 'white',
         },
         tableContainer:{
             width: '80%',
