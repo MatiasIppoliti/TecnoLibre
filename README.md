@@ -17,7 +17,7 @@ La librería extra que usé es Material UI : https://material-ui.com
 ### Instalación
 
 ```
-git clone https://github.com/MatiasIppoliti/tienda-ecommerce
+git clone https://github.com/MatiasIppoliti/TecnoLibre
 npm i
 npm start
 ```
